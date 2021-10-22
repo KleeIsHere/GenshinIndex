@@ -2,6 +2,8 @@ import numpy as np
 from scipy.optimize import minimize
 import pandas as pd
 
+# class will optimize the substats after being passed Character values and determining the form
+# of the objective function
 class OptimizeSubstats:
 
     
@@ -58,6 +60,7 @@ class OptimizeSubstats:
             #print("Total CR = " + str(CR))
             #print("Total CD = " + str(CD))
 
+# THIS IS REALLY BAD WE NEED TO FIGURE OUT SOME PROPER LOGGING OPTIONS
             stats_List.append((-1)*objective(sol.x))
             stats_List.append(ATK)
             stats_List.append(HP)

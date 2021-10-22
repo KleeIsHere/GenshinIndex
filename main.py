@@ -3,11 +3,9 @@ from scipy.optimize import minimize
 import pandas as pd
 import csv
 
-import KazuhaCharacter
-import KazuhaSkills
-import EnemyCharacter
-import ExportData
-import Weapon
+from Functions import KazuhaSkills
+from Weapons import Weapon
+from Characters import KazuhaCharacter
 
 # USER INPUT
 # we need to be able to input up to 4 different characters with 4 different weapons
@@ -31,6 +29,7 @@ kazuhaSkills = KazuhaSkills.KazuhaSkills(inputParametersChar[0])
 
 # then choose to optimize substats or not [new class] including reaction damage
     # feed the values into the objective function or not
+
 
 
 # use atk sequence to calculate instances of damage and complete damage sequence Monte Carlo it to get avg value
