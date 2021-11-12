@@ -1,6 +1,7 @@
 import pandas
 import sys
-from ...Functions import SkillSearch
+
+from Functions import SkillSearch
 
 class Itto:
 
@@ -53,8 +54,11 @@ class Itto:
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
         # pass in the atk sequnce string and then return multipliers with atk type classification
 
-#test = Itto(90, 10, 10, 10, 0)
-#util = SkillSearch.SkillSearch("Itto")
+test = Itto(90, 10, 10, 10, 0)
+util = SkillSearch.SkillSearch("Itto")
+
+for p in sys.path:
+    print(p)
 
 
 #util.classify_Skill(test.create_attack_sequence("N2C"))
