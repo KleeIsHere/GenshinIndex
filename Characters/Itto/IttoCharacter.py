@@ -1,4 +1,6 @@
 import pandas
+import sys
+from ...Functions import SkillSearch
 
 class Itto:
 
@@ -20,14 +22,42 @@ class Itto:
         self.T2 = T2
         self.T3 = T3
         self.Con = Con
-        
+    
+    # defining different skill combos as lists of strings in a dictionary
+    # each skill corresponds to a separate hit and will be treated as such in the damage calculation
+    def search_Skill_Combos(combo_name):
 
-    def create_attack_string():
+        combos = {
+
+            "N1": ["1_Hit"],
+            "N1C" : ["1_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
+            "N2C" : ["1_Hit", "2_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"]
+
+        }
+
+        return combos[combo_name]
+
+
+
+    def create_attack_sequence(self, combo_name):
+
         x = 0
-        #talentMultipliers = pull the multipliers out from table into a dictionary based on 
-        # after identifying that we are in fact doing a normal attack then we need to determine the sequence of attacks
+        #talentMultipliers = pull the multipliers out from table into a dictionary based on combo name
+    
+        skill_List = self.search_Skill_Combos(combo_name)
+
+        # we need to classify each skill if they are a normal / Eskill / ULT to query the right table with skill search
+
+
+
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
         # pass in the atk sequnce string and then return multipliers with atk type classification
+
+#test = Itto(90, 10, 10, 10, 0)
+#util = SkillSearch.SkillSearch("Itto")
+
+
+#util.classify_Skill(test.create_attack_sequence("N2C"))
 
 
     # Normal Attack Cycle
