@@ -16,6 +16,8 @@ class Itto:
     NormalAttackCounter = 1
     type = "Geo"
 
+    util = SkillSearch.SkillSearch("Itto")
+
     # constructor (used to initialize and instance of the Itto class)
     def __init__(self, LVL, T1, T2, T3, Con):
         self.LVL = LVL
@@ -26,39 +28,46 @@ class Itto:
     
     # defining different skill combos as lists of strings in a dictionary
     # each skill corresponds to a separate hit and will be treated as such in the damage calculation
-    def search_Skill_Combos(combo_name):
+    def search_Skill_Combos(self, combo_name):
 
         combos = {
 
             "N1": ["1_Hit"],
             "N1C" : ["1_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
-            "N2C" : ["1_Hit", "2_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"]
+            "N2C" : ["1_Hit", "2_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
+            "N1+E" : ["1_Hit", "EPressDMG"]
 
         }
 
+        #print (type(combos[combo_name]))
         return combos[combo_name]
 
 
-
+    # talentMultipliers = pull the multipliers out from table into a dictionary based on combo name
     def create_attack_sequence(self, combo_name):
 
-        x = 0
-        #talentMultipliers = pull the multipliers out from table into a dictionary based on combo name
+        #creating list of talent Levels
+        talent_LVL_List = [self.T1, self.T2, self.T3]
     
-        skill_List = self.search_Skill_Combos(combo_name)
+        # creating a list of the skill names
+        skill_name_List = self.search_Skill_Combos(combo_name)
 
-        # we need to classify each skill if they are a normal / Eskill / ULT to query the right table with skill search
+        # we need to classify each skill to its Talent to query the right table with skill search
+        skill_talent_List = self.util.classify_Skill(skill_name_List)
 
+        # passing talent / LVL / name lists into the skillSearch class to get the Skill Multipliers
+        skill_multipliers = self.util.getSkillMultipliers(skill_talent_List, talent_LVL_List)
+
+        
+        return skill_multipliers
 
 
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
         # pass in the atk sequnce string and then return multipliers with atk type classification
 
-test = Itto(90, 10, 10, 10, 0)
-util = SkillSearch.SkillSearch("Itto")
 
-for p in sys.path:
-    print(p)
+test = Itto(90, 10, 10, 10, 0)
+print(test.create_attack_sequence('N1+E'))
 
 
 #util.classify_Skill(test.create_attack_sequence("N2C"))
