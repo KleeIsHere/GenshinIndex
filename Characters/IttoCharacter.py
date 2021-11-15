@@ -59,7 +59,7 @@ class Itto:
         skill_multipliers = self.util.getSkillMultipliers(skill_talent_List, talent_LVL_List)
 
         
-        return skill_multipliers
+        return skill_multipliers, skill_talent_List
 
 
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
