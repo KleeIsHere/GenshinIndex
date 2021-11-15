@@ -1,4 +1,4 @@
-from Whiteblind import Stack
+#from Characters.Weapons.Whiteblind import Stack
 
 class Whiteblind:
 

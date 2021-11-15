@@ -1,7 +1,7 @@
 import pandas
 import sys
 
-from Functions import SkillSearch
+from Characters.Functions import SkillSearch
 
 class Itto:
 
@@ -79,8 +79,8 @@ class Itto:
         start_frame = frame
         end_frame = start_frame + self.frame_Data[skill_name]
 
-test = Itto(90, 10, 10, 10, 0)
-print(test.create_attack_sequence('N1'))
+#test = Itto(90, 10, 10, 10, 0)
+#print(test.create_attack_sequence('N1'))
 
 
 #util.classify_Skill(test.create_attack_sequence("N2C"))
