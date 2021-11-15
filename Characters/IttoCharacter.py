@@ -16,6 +16,13 @@ class Itto:
     NormalAttackCounter = 1
     type = "Geo"
 
+    frame_Data = {
+        '1_Hit':20,
+        '2_Hit':25,
+        '3_Hit':30,
+        'dash':20
+    }
+
     util = SkillSearch.SkillSearch("Itto")
 
     # constructor (used to initialize and instance of the Itto class)
@@ -32,7 +39,7 @@ class Itto:
 
         combos = {
 
-            "N1": ["1_Hit"],
+            "N1": ["1_Hit", "Dash"],
             "N1C" : ["1_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
             "N2C" : ["1_Hit", "2_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
             "N1+E" : ["1_Hit", "EPressDMG"]
@@ -65,9 +72,15 @@ class Itto:
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
         # pass in the atk sequnce string and then return multipliers with atk type classification
 
+    def initiate_skill(self, skillMultiplier, skillinfo, frame):
+        skill_multiplier = skillMultiplier
+        skill_name = skillinfo[0]
+        skill_type = skillinfo[1]
+        start_frame = frame
+        end_frame = start_frame + self.frame_Data[skill_name]
 
 test = Itto(90, 10, 10, 10, 0)
-print(test.create_attack_sequence('N1+E'))
+print(test.create_attack_sequence('N1'))
 
 
 #util.classify_Skill(test.create_attack_sequence("N2C"))

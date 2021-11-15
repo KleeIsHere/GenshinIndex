@@ -1,13 +1,15 @@
 import pandas as pd
 
 
-class GaugeUnitEngine:
+class DamageEngine:
 
+    # action list can be an attack sequence or series of attack sequences
     def __init__(self, actionList, team):
-        self.actionList = actionList
+        self.skillMultipliers = actionList[0]
+        self.skillDetails = actionList[1]
         self.team = team
 
-    def runEngine(self, endConditions):
+    def runEngine(self, endConditions, team):
         frame = 0
         conditions = True
 
@@ -26,7 +28,16 @@ class GaugeUnitEngine:
             # we will use the GaugeTracking class to check the states of the applied element
             # gauge needs to decay as a function of its Unit
 
-            
+            for member in team:
+                pass
+                # check the conditionals and buffs and status of each skill on each frame
+                # the length of each skill and the duration need to be saved inside of the character object
+
+
+            # check which skills / buffs are active
+
+            # for now we can just do damage calculation
+            #damage_formula_output = 
 
         
 
@@ -46,7 +57,7 @@ class GaugeUnitEngine:
 
     def nextAction(self, currentAction):
         currentIndex = self.actionList.index(currentAction)
-        newIndex = currentIndex  + 1
+        newIndex = currentIndex + 1
         return self.actionList[newIndex]
 
 
