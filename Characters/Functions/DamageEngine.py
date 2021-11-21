@@ -3,14 +3,22 @@ import pandas as pd
 
 class DamageEngine:
 
+    teamDict = {}
+
     # action list can be an attack sequence or series of attack sequences
     def __init__(self, actionList, team):
-        self.skillMultipliers = actionList[0]
-        self.skillDetails = actionList[1]
-        self.team = team
+        self.characterList = actionList[0]
+        self.skillMultipliers = actionList[1]
+        self.skillDetails = actionList[2]
+
+        # set team into a dictionary so that we can access each obj with the name of the character
+        for member in team:
+            self.teamDict[member.name] = member
+
+        self.frame = 0
+        self.finalFrame = 60*60*3
 
     def runEngine(self, endConditions, team):
-        frame = 0
         conditions = True
 
         # use team in order to initialize character objects
@@ -27,6 +35,12 @@ class DamageEngine:
             #   - tracking the status of the applied element
             # we will use the GaugeTracking class to check the states of the applied element
             # gauge needs to decay as a function of its Unit
+
+            for name in self.characterList:
+                
+                # access the object of the character 
+                pass
+
 
             for member in team:
                 pass
@@ -53,7 +67,10 @@ class DamageEngine:
             self.frame = self.frame+1
 
             # Final step is to check that no termination conditions are met
-            conditions = self.checkConditions(endConditions)
+            #conditions = self.checkConditions(endConditions)
+            
+            if self.frame >= self.finalFrame:
+                conditions = False
 
     def nextAction(self, currentAction):
         currentIndex = self.actionList.index(currentAction)
@@ -66,7 +83,7 @@ class DamageEngine:
        # put the conditions inside of each character's object
        # pass some string to call a condition check
        # ex: HuTao Eskill active? -> checks Hu Tao's Eskill duration and returns TRUE / FALSE
-       # Inside of the main class 
+       # Inside of the main class
        pass
 
 

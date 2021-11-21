@@ -6,6 +6,7 @@ from Characters.Functions import SkillSearch
 class Itto:
 
     # Itto's base stats (later we will pull these based off his lvl from a table) LVL 90 right now
+    name = "Itto"
     baseATK = 191
     baseDEF = 930
     attackBonus = 0
@@ -64,10 +65,8 @@ class Itto:
 
         # passing talent / LVL / name lists into the skillSearch class to get the Skill Multipliers
         skill_multipliers = self.util.getSkillMultipliers(skill_talent_List, talent_LVL_List)
-
         
-        return skill_multipliers, skill_talent_List
-
+        return [self.name]*len(skill_multipliers), skill_multipliers, skill_talent_List
 
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
         # pass in the atk sequnce string and then return multipliers with atk type classification

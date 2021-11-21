@@ -8,7 +8,7 @@ class SkillSearch:
 
         # accessing the correct file
         self.character_Table_String =  char_name + "Tables.xlsx"
-        self.data_folder = Path("C:/Users/micha/Documents/GenshinCoding/GenshinIndex/Characters/DataTables/")
+        self.data_folder = Path("../GenshinIndex/Characters/DataTables/")
         self.full_path = self.data_folder / self.character_Table_String
 
         # create three dataframes that hold the data for each skill
@@ -50,7 +50,7 @@ class SkillSearch:
     # defining a classifier function here because this is where the tables exist
     def classify_Skill(self, skill_String):
 
-        print(skill_String)
+        #print(skill_String)
 
         # pull in the first column of each dataframe as a list
         normal_ATK_names = self.normal_ATK_dataframe.index.values
@@ -76,7 +76,7 @@ class SkillSearch:
                 classified_skill = (skill_String[skill_index], "ULT")
                 skill_String_Types.append(classified_skill)
 
-        print(skill_String_Types)
+        #print(skill_String_Types)
         return skill_String_Types
 
         # check each list to see if the skill falls underneath it
