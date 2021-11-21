@@ -15,6 +15,9 @@ class Itto:
     elementalBonus = 0
     elementalMastery = 0
     NormalAttackCounter = 1
+
+    # stacks will just be an array of tuplesindicating their start frames and end frames
+    superlativeStrength = []
     type = "Geo"
 
     frame_Data = {
@@ -41,14 +44,15 @@ class Itto:
         combos = {
 
             "N1": ["1_Hit", "Dash"],
-            "N1C" : ["1_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
-            "N2C" : ["1_Hit", "2_Hit", "Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
+            "N4": ["1_Hit", "2_Hit", "3_Hit", "4_Hit"],
+            "C" : ["Arataki_Kesagiri_Combo_Slash", "Arataki_Kesagiri_Final_Slash"],
             "N1+E" : ["1_Hit", "EPressDMG"]
 
         }
 
         #print (type(combos[combo_name]))
         return combos[combo_name]
+
 
 
     # talentMultipliers = pull the multipliers out from table into a dictionary based on combo name
@@ -77,6 +81,34 @@ class Itto:
         skill_type = skillinfo[1]
         start_frame = frame
         end_frame = start_frame + self.frame_Data[skill_name]
+
+    def checkSuperlativeStrength(self, skill, frame):
+
+        if skill == ("2_Hit"):
+            self.superlativeStrength.append([frame, frame + 60*60])
+        elif skill == ("4_Hit"):
+            self.superlativeStrength.append([frame, frame + 60*60])
+            self.superlativeStrength.append([frame, frame + 60*60])
+        else:
+            for stack in self.superlativeStrength:
+                if stack[1] == frame:
+                    self.superlativeStrength.remove(stack)
+
+    def checkChargedAttack(self, skill, frame):
+
+        #removes the first 
+        if skill == "Arataki_Kesagiri_Combo_Slash":
+            del self.superlativeStrength[0]
+    
+        elif skill == "Arataki_Kesagiri_Final_Slash":
+            del self.superlativeStrength[0]
+
+
+    def runChecks(self, skill, frame):
+        self.checkSuperlativeStrength(skill, frame)
+        self.checkChargedAttack(skill, frame)
+        
+
 
 #test = Itto(90, 10, 10, 10, 0)
 #print(test.create_attack_sequence('N1'))

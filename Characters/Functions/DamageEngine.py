@@ -39,8 +39,13 @@ class DamageEngine:
             for name in self.characterList:
                 
                 # access the object of the character 
-                pass
-
+                character = self.teamDict[name]
+                
+                # calculate damage for each attack
+                # pass damage stats into damage function
+                # check for character buffs
+                # check for team buffs (bennet / resonance)
+                # check for weapon buffs
 
             for member in team:
                 pass
