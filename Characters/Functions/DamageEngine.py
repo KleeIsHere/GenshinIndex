@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 class DamageEngine:
 
     teamDict = {}
@@ -16,15 +15,19 @@ class DamageEngine:
             self.teamDict[member.name] = member
 
         self.frame = 0
-        self.finalFrame = 60*60*3
+        self.finalFrame = 60
 
     def runEngine(self, endConditions, team):
         conditions = True
 
+        print(self.skillMultipliers)
+        print(self.characterList)
+        print(self.skillDetails)
+
         # use team in order to initialize character objects
         # from character objects pull out values needed for the conditions / damage calculation / etc...
 
-        currentAction = self.actionList[0]
+        #currentAction = self.actionList[0]
 
         # while loop checks that all conditions are true. If any are false then it exits the loop
         while conditions:
@@ -36,16 +39,30 @@ class DamageEngine:
             # we will use the GaugeTracking class to check the states of the applied element
             # gauge needs to decay as a function of its Unit
 
+            index = 0
+
             for name in self.characterList:
+
                 
                 # access the object of the character 
                 character = self.teamDict[name]
-                
-                # calculate damage for each attack
+
+
+
+                # calculate damage for the attack
                 # pass damage stats into damage function
+                
+
                 # check for character buffs
                 # check for team buffs (bennet / resonance)
                 # check for weapon buffs
+                # character.runChecks()
+                damage = CalculateDamage(character.getStats(), self.skillMultipliers[index])
+
+                print(damage.calculate_DMG())
+                #print(self.frame)
+
+                index =  index + 1
 
             for member in team:
                 pass
@@ -91,6 +108,18 @@ class DamageEngine:
        # Inside of the main class
        pass
 
+class CalculateDamage:
 
+    def __init__(self, stats, skillMultipier):
+
+        self.stats = stats
+        self.skillMultiplier = skillMultipier
+    
+    def calculate_DMG(self):
+        
+        print("SM: " + str(self.skillMultiplier))
+        DMG =  self.stats["baseATK"] * self.skillMultiplier
+
+        return DMG
 
 

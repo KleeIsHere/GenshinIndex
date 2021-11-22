@@ -1,7 +1,9 @@
+from os import name
 import pandas
 import sys
 
 from Characters.Functions import SkillSearch
+#from Functions import SkillSearch
 
 class Itto:
 
@@ -58,6 +60,8 @@ class Itto:
     # talentMultipliers = pull the multipliers out from table into a dictionary based on combo name
     def create_attack_sequence(self, combo_name):
 
+        names_list = [self.name]
+
         #creating list of talent Levels
         talent_LVL_List = [self.T1, self.T2, self.T3]
     
@@ -69,8 +73,17 @@ class Itto:
 
         # passing talent / LVL / name lists into the skillSearch class to get the Skill Multipliers
         skill_multipliers = self.util.getSkillMultipliers(skill_talent_List, talent_LVL_List)
+
+        # correcting charged attacks based on superlativeStacks adding the charged attack at the beginning of each list
+        if skill_talent_List[0][0] == 'Arataki_Kesagiri_Combo_Slash':
+            skill_multipliers.insert(0, skill_multipliers[0]*len(self.superlativeStrength))
+            names_list = names_list*len(skill_multipliers)
+            skill_talent_List.insert(0, skill_talent_List[0]*len(self.superlativeStrength))
         
-        return [self.name]*len(skill_multipliers), skill_multipliers, skill_talent_List
+        else:
+            names_list = names_list*len(skill_multipliers)
+
+        return names_list, skill_multipliers, skill_talent_List
 
         # 3 Talents [Normal, Elemental, Burst] then we can number hits afterwards. also we can use A for all hits
         # pass in the atk sequnce string and then return multipliers with atk type classification
@@ -85,13 +98,13 @@ class Itto:
     def checkSuperlativeStrength(self, skill, frame):
 
         if skill == ("2_Hit"):
-            self.superlativeStrength.append([frame, frame + 60*60])
+            self.superlativeStrength.append(SS_Stack(frame))
         elif skill == ("4_Hit"):
-            self.superlativeStrength.append([frame, frame + 60*60])
-            self.superlativeStrength.append([frame, frame + 60*60])
+            self.superlativeStrength.append(SS_Stack(frame))
+            self.superlativeStrength.append(SS_Stack(frame))
         else:
             for stack in self.superlativeStrength:
-                if stack[1] == frame:
+                if stack.endFrame == frame:
                     self.superlativeStrength.remove(stack)
 
     def checkChargedAttack(self, skill, frame):
@@ -107,12 +120,31 @@ class Itto:
     def runChecks(self, skill, frame):
         self.checkSuperlativeStrength(skill, frame)
         self.checkChargedAttack(skill, frame)
+
+    def getStats(self):
+        stats = {
+            "name" : self.name,
+            "baseATK" : self.baseATK,
+            "baseDEF" : self.baseDEF,
+            "attackBonus" : self.attackBonus,
+            "critRate" : self.critRate,
+            "elementalBonu" : self.elementalBonus,
+            "elementalMastery" : self.elementalMastery,
+            "NormalAttackCounter" : self.NormalAttackCounter,
+        }
+        return stats
+        
+class SS_Stack:
+
+    def __init__(self, frame):
+        self.startFrame = frame
+        self.endFrame = self.startFrame + 60*60
         
 
 
-#test = Itto(90, 10, 10, 10, 0)
-#print(test.create_attack_sequence('N1'))
-
+test = Itto(90, 10, 10, 10, 0)
+print(test.create_attack_sequence('N4'))
+print(test.create_attack_sequence('C'))
 
 #util.classify_Skill(test.create_attack_sequence("N2C"))
 
