@@ -122,4 +122,78 @@ class CalculateDamage:
 
         return DMG
 
+# the conditionals class will have a bunch of methods that initialize each of the conditionals
+# the conditionals will be defined in terms of a bunch of local variables within an instance of the class
+# other methods will be used to check the conditionals
+
+class Conditionals:
+
+    
+    # time conditionals defined by frame data
+
+    startFrame = 0
+    currentFrame = startFrame # will be updated by methods after creation of the object
+    endFrame  = 60*60*3 # end frame is default set to a 3min simulation, time from Spiral Abyss 36 stars
+
+    def __init__(self):
+        pass
+
+    # energy recharge conditionals: defined by the ER status of each character
+    characterMaxEnergy = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0
+    }
+
+    characterCurrentEnergy = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0
+    }
+
+    # Basically the energy will change based on the input of whatever skills are used
+    # we will write functions here to check conditionally for the state of the ER
+    # we will not include stat analysis
+
+
+
+
+    # enemy status conditionals: 
+
+    # reaction conditionals:
+
+
+
+    # time conditional functions
+
+    def updateFrame(self, increment):
+        self.currentFrame = self.currentFrame + increment
+
+    def setEndFrame(self, newEndFrame):
+        self.endFrame = newEndFrame
+
+    def checkEndSim(self):
+        
+        reachedEnd = False
+        
+        if self.currentFrame > self.endFrame:
+            reachedEnd = True
+        
+        return reachedEnd
+
+    # energy Conditional Functions
+
+    def characterBurstReady (self, charIndex):
+
+        burstReady = False
+        
+        if self.characterCurrentEnergy >= self.characterMaxEnergy:
+            burstReady = True
+
+        return burstReady
+
+    # skill cooldown conditionals 
+    # will look at a the value of whether a skill is on or off cooldown
 
