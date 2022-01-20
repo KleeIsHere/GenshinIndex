@@ -2,7 +2,7 @@ from os import name
 import pandas
 import sys
 
-from Characters.Functions import SkillSearch
+from Functions import SkillSearch
 #from Functions import SkillSearch
 
 class Ganyu:

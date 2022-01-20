@@ -1,7 +1,7 @@
-from Characters.Functions.DamageEngine import DamageEngine
+from Functions.DamageEngine import DamageEngine
 from Characters.IttoCharacter import Itto
-from Characters.Weapons.Whiteblind import Whiteblind
-from Characters.Weapons.Whiteblind import Whiteblind
+from Weapons.Whiteblind import Whiteblind
+from Weapons.Whiteblind import Whiteblind
 
 # initializing objects for engines, characters, and weapons
 itto_obj = Itto(90, 10, 10, 10, 0)

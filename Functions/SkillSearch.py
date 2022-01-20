@@ -8,7 +8,7 @@ class SkillSearch:
 
         # accessing the correct file
         self.character_Table_String =  char_name + "Tables.xlsx"
-        self.data_folder = Path("../GenshinIndex/Characters/DataTables/")
+        self.data_folder = Path("./GenshinIndex/DataTables/")
         self.full_path = self.data_folder / self.character_Table_String
 
         # create three dataframes that hold the data for each skill
